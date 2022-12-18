@@ -5,9 +5,11 @@ export function Nav() {
     <>
       <Header>
         <Link to="/" end>
-          Home
+          <b>Home</b>
         </Link>
-        <Link to="/movies">Movies</Link>
+        <Link to="/movies">
+          <b>Movies</b>
+        </Link>
       </Header>
     </>
   );
