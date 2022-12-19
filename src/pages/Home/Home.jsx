@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { Box, Item } from './Home.styled';
 
 export function Home() {
-  const [trendFilm, setTrendFilm] = RequestApi();
+  const [trendFilm, setTrendFilm] = RequestApi(); // eslint-disable-line
   console.log(trendFilm);
   return (
     <Box>
