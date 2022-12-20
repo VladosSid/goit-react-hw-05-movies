@@ -1,11 +1,13 @@
 import RequestApi from '../../hooks/RequestAPI';
 import { NavLink } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 import { Box, Item } from './Home.styled';
 
-export function Home() {
+export function Home(filmId) {
   const [trendFilm, setTrendFilm] = RequestApi(); // eslint-disable-line
-  console.log(trendFilm);
+  const [idFilmUrl, setIdFilm] = useState(null);
+
   return (
     <Box>
       <h1>Trending today</h1>
@@ -13,7 +15,14 @@ export function Home() {
         {trendFilm
           ? trendFilm.map(({ original_title, id }) => (
               <Item key={id}>
-                <NavLink>{original_title}</NavLink>
+                <NavLink
+                  to={`${original_title
+                    .toLowerCase()
+                    .replace(':', '')
+                    .replaceAll(' ', '-')}`}
+                >
+                  {original_title}
+                </NavLink>
               </Item>
             ))
           : null}

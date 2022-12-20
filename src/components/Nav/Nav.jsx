@@ -1,8 +1,8 @@
-import { Link, Header } from './Nav.styled';
+import { Link, Header, Container } from './Nav.styled';
 
 export function Nav() {
   return (
-    <>
+    <Container>
       <Header>
         <Link to="/" end>
           <b>Home</b>
@@ -11,7 +11,7 @@ export function Nav() {
           <b>Movies</b>
         </Link>
       </Header>
-    </>
+    </Container>
   );
 }
 
