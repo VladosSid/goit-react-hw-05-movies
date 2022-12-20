@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BASE_URL, API_KEY } from '../../components/utils';
 
-axios.defaults.baseURL = 'https://api.themoviedb.org/3';
-
-const API_KEY = 'd27eeed894e03e02a15bcd31471a58c6';
+axios.defaults.baseURL = `${BASE_URL}`;
 
 export function RequestApi(search = null, id = null) {
   const [state, setState] = useState(null);
@@ -30,7 +29,7 @@ export function RequestApi(search = null, id = null) {
     async function apiData() {
       try {
         const response = await axios.get(`/movie/${id}?api_key=${API_KEY}`);
-        // console.log(response.data);
+
         setState(response.data);
       } catch (error) {
         console.log(error.message);
