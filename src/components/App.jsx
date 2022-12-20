@@ -5,7 +5,7 @@ import { useState } from 'react';
 import SharedLayout from './SharedLayout';
 import Home from '../pages/Home';
 import Movies from '../pages/Movies';
-import CardFilm from './CardFilm';
+import CardFilm from '../pages/CardFilm';
 
 export const App = () => {
   const [carrentFilm, setCarrentFilm] = useState(null);
@@ -23,7 +23,7 @@ export const App = () => {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="movies" element={<Movies />} />
-          <Route path="movies/:id" element={<CardFilm />} />
+          <Route path="movies/:id/:nameFilm" element={<CardFilm />} />
         </Route>
       </Routes>
     </div>
