@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'; // eslint-disable-line
 
 export function Movies() {
   const [queryValue, setQueryValue] = useState('');
