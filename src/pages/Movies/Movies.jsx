@@ -1,9 +1,21 @@
 import { Outlet } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 export function Movies() {
+  const [queryValue, setQueryValue] = useState('');
+
   return (
     <>
-      Movies page
+      <form>
+        <input
+          type="text"
+          value={queryValue}
+          onChange={e => {
+            setQueryValue(e.target.value);
+          }}
+        />
+        <button type="submit">Search</button>
+      </form>
       <Outlet />
     </>
   );

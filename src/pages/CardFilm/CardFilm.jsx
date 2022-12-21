@@ -11,7 +11,7 @@ export function CardFilm() {
 
   return (
     <Container>
-      <Button>
+      <Button to="/">
         <b>Go back</b>
       </Button>
 

@@ -1,15 +1,23 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
+import { IMG_PATH } from '../utils';
 import RequestCast from '../../hooks/RequestApiSecondary';
 
 export function Cast() {
   const { id } = useParams();
-  //   const cast = RequestCast('credits', id);
   const [cast, setCast] = RequestCast('credits', id); // eslint-disable-line
 
-  console.log(cast);
   return (
-    <>{cast ? cast.cast.map(({ name }) => <li key={name}>{name}</li>) : null}</>
+    <>
+      {cast
+        ? cast.cast.map(({ name, profile_path }) => (
+            <li key={name}>
+              <img src={`${IMG_PATH}w200${profile_path}`} alt="Profile Path" />
+              <p>{name}</p>
+            </li>
+          ))
+        : null}
+    </>
   );
 }
 export default Cast;

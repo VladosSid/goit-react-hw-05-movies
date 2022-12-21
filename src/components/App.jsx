@@ -1,32 +1,21 @@
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
 
-// import Nav from './Nav';
 import SharedLayout from './SharedLayout';
 import Home from '../pages/Home';
 import Movies from '../pages/Movies';
 import CardFilm from '../pages/CardFilm';
-import { Cast } from '../components/CardFilm';
+import { Cast, Reviews } from '../components/CardFilm';
 
 export const App = () => {
-  const [carrentFilm, setCarrentFilm] = useState(null);
-
-  const currentIdFilm = id => {
-    setCarrentFilm(id);
-    console.log(carrentFilm);
-  };
-
   return (
     <div>
-      {/* <Nav /> */}
-      {/* <SharedLayout /> */}
       <Routes>
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<Home />} />
           <Route path="movies" element={<Movies />} />
           <Route path="movies/:id/:nameFilm" element={<CardFilm />}>
-            <Route path=":cast" element={<Cast />} />
-            <Route path=":reviews" element={<Cast />} />
+            <Route path="cast" element={<Cast />} />
+            <Route path="reviews" element={<Reviews />} />
           </Route>
         </Route>
       </Routes>
