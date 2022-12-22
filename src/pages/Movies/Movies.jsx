@@ -1,21 +1,33 @@
-import { Outlet } from 'react-router-dom';
-import { useState, useEffect } from 'react'; // eslint-disable-line
+import { Outlet, useSearchParams } from 'react-router-dom';
+import { useState, useMemo } from 'react'; // eslint-disable-line
+import InputSearch from '../../components/InputMoviesSearch';
+import { useRequestAPI } from '../../hooks/RequestAPI/HooksRequestAPI';
 
 export function Movies() {
-  const [queryValue, setQueryValue] = useState('');
+  const { resoult, RequestSearch } = useRequestAPI(); // eslint-disable-line
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const querySearch = searchParams.get('query') ?? '';
+
+  const chengeValue = value => {
+    setSearchParams(value !== '' ? { query: value } : {});
+  };
+
+  const submitQuery = e => {
+    e.preventDefault();
+    RequestSearch(querySearch);
+  };
+
+  // console.log(resoult);
 
   return (
     <>
-      <form>
-        <input
-          type="text"
-          value={queryValue}
-          onChange={e => {
-            setQueryValue(e.target.value);
-          }}
-        />
-        <button type="submit">Search</button>
-      </form>
+      <InputSearch
+        onChenge={chengeValue}
+        value={querySearch}
+        submit={submitQuery}
+      ></InputSearch>
+
       <Outlet />
     </>
   );
