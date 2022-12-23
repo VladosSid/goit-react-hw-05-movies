@@ -1,10 +1,11 @@
-import { Outlet, useSearchParams } from 'react-router-dom';
-import { useState, useMemo } from 'react'; // eslint-disable-line
+import { useSearchParams } from 'react-router-dom';
 import InputSearch from '../../components/InputMoviesSearch';
 import { useRequestAPI } from '../../hooks/RequestAPI/HooksRequestAPI';
 
+import ItemLink from '../../components/ListFilmLink';
+
 export function Movies() {
-  const { resoult, RequestSearch } = useRequestAPI(); // eslint-disable-line
+  const { state, setQuerySearch } = useRequestAPI(); // eslint-disable-line
 
   const [searchParams, setSearchParams] = useSearchParams();
   const querySearch = searchParams.get('query') ?? '';
@@ -15,10 +16,8 @@ export function Movies() {
 
   const submitQuery = e => {
     e.preventDefault();
-    RequestSearch(querySearch);
+    setQuerySearch(querySearch);
   };
-
-  // console.log(resoult);
 
   return (
     <>
@@ -28,7 +27,13 @@ export function Movies() {
         submit={submitQuery}
       ></InputSearch>
 
-      <Outlet />
+      <ul>
+        {state
+          ? state.results.map(({ original_title, id }) => (
+              <ItemLink key={id} title={original_title} id={id} />
+            ))
+          : 'Enter movie name'}
+      </ul>
     </>
   );
 }

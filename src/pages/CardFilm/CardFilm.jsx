@@ -1,21 +1,28 @@
-import { useParams, Outlet, Link } from 'react-router-dom';
+import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
-import RequestApi from '../../hooks/RequestAPI';
+import { useRequestAPI } from '../../hooks/RequestAPI/HooksRequestAPI';
 import { CardInfoFilm } from '../../components/CardFilm';
 
 import { Container, Button } from './CardFilm.styled';
 
 export function CardFilm() {
+  const { state, setMoviesId } = useRequestAPI();
   const { id } = useParams();
-  const [dataFilm, setDataFilm] = RequestApi(null, id); // eslint-disable-line
+  const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/';
+
+  useEffect(() => {
+    setMoviesId(id);
+  }, []); // eslint-disable-line
 
   return (
     <Container>
-      <Button to="/">
+      <Button to={backLinkHref}>
         <b>Go back</b>
       </Button>
 
-      {dataFilm ? <CardInfoFilm dataFilm={dataFilm} /> : null}
+      {state ? <CardInfoFilm dataFilm={state} /> : null}
 
       <div>
         Additional information

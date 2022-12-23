@@ -1,17 +1,22 @@
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { IMG_PATH } from '../utils';
-import RequestCast from '../../hooks/RequestApiSecondary';
+import { useRequestAPI } from '../../hooks/RequestAPI/HooksRequestAPI';
 
 export function Cast() {
+  const { stateCast, setMoviesCastReviews } = useRequestAPI();
   const { id } = useParams();
-  const [cast, setCast] = RequestCast('credits', id); // eslint-disable-line
+
+  useEffect(() => {
+    setMoviesCastReviews({ id: id, type: 'credits' });
+  }, []); // eslint-disable-line
 
   return (
     <>
-      {cast
-        ? cast.cast.map(({ name, profile_path }) => (
-            <li key={name}>
+      {stateCast
+        ? stateCast.cast.map(({ name, profile_path, id }) => (
+            <li key={id}>
               <img src={`${IMG_PATH}w200${profile_path}`} alt="Profile Path" />
               <p>{name}</p>
             </li>

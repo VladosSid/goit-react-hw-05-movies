@@ -1,26 +1,24 @@
-import RequestApi from '../../hooks/RequestAPI';
-import { NavLink } from 'react-router-dom';
+import { useRequestAPI } from '../../hooks/RequestAPI/HooksRequestAPI';
+import { useEffect } from 'react';
 
-import { Box, Item } from './Home.styled';
+import { Box } from './Home.styled';
+import ItemLink from '../../components/ListFilmLink';
 
 export function Home() {
-  const [trendFilm, setTrendFilm] = RequestApi(); // eslint-disable-line
+  const { state, setHomePopularity } = useRequestAPI();
+
+  useEffect(() => {
+    setHomePopularity(true);
+  }, []); // eslint-disable-line
+
   return (
     <Box>
       <h1>Trending today</h1>
+
       <ul>
-        {trendFilm
-          ? trendFilm.map(({ original_title, id }) => (
-              <Item key={id}>
-                <NavLink
-                  to={`movies/${id}/${original_title
-                    .toLowerCase()
-                    .replace(':', '')
-                    .replaceAll(' ', '-')}`}
-                >
-                  {original_title}
-                </NavLink>
-              </Item>
+        {state
+          ? state.map(({ original_title, id }) => (
+              <ItemLink key={id} title={original_title} id={id} />
             ))
           : null}
       </ul>

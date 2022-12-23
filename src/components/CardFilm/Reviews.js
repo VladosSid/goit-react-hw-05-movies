@@ -1,16 +1,21 @@
 import { useParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
-import RequestCast from '../../hooks/RequestApiSecondary';
+import { useRequestAPI } from '../../hooks/RequestAPI/HooksRequestAPI';
 
 export function Reviews() {
+  const { stateCast, setMoviesCastReviews } = useRequestAPI();
+
   const { id } = useParams();
 
-  const [reviews, setReviews] = RequestCast('reviews', id); // eslint-disable-line
+  useEffect(() => {
+    setMoviesCastReviews({ id: id, type: 'reviews' });
+  }, []); // eslint-disable-line
 
   return (
     <ul>
-      {reviews
-        ? reviews.results.map(({ author, content, created_at, id }) => (
+      {stateCast
+        ? stateCast.results.map(({ author, content, created_at, id }) => (
             <li key={id}>
               <div>
                 <h3>{author}</h3>
@@ -19,7 +24,7 @@ export function Reviews() {
               <p>{content}</p>
             </li>
           ))
-        : 'Reviews not found'}
+        : 'We don`t have any reviews for this movies.'}
     </ul>
   );
 }
