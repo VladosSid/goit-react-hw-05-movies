@@ -2,7 +2,7 @@ import { useParams, Outlet, Link, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import { useRequestAPI } from '../../hooks/RequestAPI/HooksRequestAPI';
-import { CardInfoFilm } from '../../components/CardFilm';
+import BaseInfoFilm from '../../components/BaseInfoFilm';
 
 import { Container, Button } from './CardFilm.styled';
 
@@ -22,7 +22,7 @@ export function CardFilm() {
         <b>Go back</b>
       </Button>
 
-      {state ? <CardInfoFilm dataFilm={state} /> : null}
+      {state ? <BaseInfoFilm dataFilm={state} /> : null}
 
       <div>
         Additional information

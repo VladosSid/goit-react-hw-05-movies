@@ -2,7 +2,7 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 import { Item } from './ListFilm.styled';
 
-export function ItemLink({ title, id }) {
+export function ListFilm({ title, id }) {
   const location = useLocation();
   return (
     <>
@@ -21,4 +21,4 @@ export function ItemLink({ title, id }) {
   );
 }
 
-export default ItemLink;
+export default ListFilm;

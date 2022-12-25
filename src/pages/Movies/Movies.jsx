@@ -1,8 +1,9 @@
 import { useSearchParams } from 'react-router-dom';
-import InputSearch from '../../components/InputMoviesSearch';
+import { useEffect } from 'react';
+import InputSearch from '../../components/InpunSearch';
 import { useRequestAPI } from '../../hooks/RequestAPI/HooksRequestAPI';
 
-import ItemLink from '../../components/ListFilmLink';
+import ItemLink from '../../components/ListFilm';
 
 export function Movies() {
   const { state, setQuerySearch } = useRequestAPI(); // eslint-disable-line
@@ -13,6 +14,14 @@ export function Movies() {
   const chengeValue = value => {
     setSearchParams(value !== '' ? { query: value } : {});
   };
+
+  useEffect(() => {
+    if (querySearch === '') {
+      return;
+    }
+
+    setQuerySearch(querySearch);
+  }, []); // eslint-disable-line
 
   const submitQuery = e => {
     e.preventDefault();

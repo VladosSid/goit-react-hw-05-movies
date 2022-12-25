@@ -2,7 +2,7 @@ import { IMG_PATH } from '../utils';
 
 import { Container } from './BaseInfoFilm.styled';
 
-export function CardInfoFilm({ dataFilm }) {
+export function BaseInfoFilm({ dataFilm }) {
   const { original_title, overview, vote_average, genres, poster_path } =
     dataFilm;
 
@@ -33,4 +33,4 @@ export function CardInfoFilm({ dataFilm }) {
   );
 }
 
-export default CardInfoFilm;
+export default BaseInfoFilm;
