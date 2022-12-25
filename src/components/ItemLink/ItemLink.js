@@ -1,9 +1,10 @@
 import { NavLink, useLocation } from 'react-router-dom';
 
-import { Item } from './ListFilm.styled';
+import { Item } from './ItemLink.styled';
 
-export function ListFilm({ title, id }) {
+export function ItemLink({ title, id }) {
   const location = useLocation();
+  // console.log(location);
   return (
     <>
       <Item>
@@ -21,4 +22,4 @@ export function ListFilm({ title, id }) {
   );
 }
 
-export default ListFilm;
+export default ItemLink;

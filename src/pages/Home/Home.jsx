@@ -2,7 +2,7 @@ import { useRequestAPI } from '../../hooks/RequestAPI/HooksRequestAPI';
 import { useEffect } from 'react';
 
 import { Box } from './Home.styled';
-import ItemLink from '../../components/ListFilm';
+import ItemLink from '../../components/ItemLink';
 
 export function Home() {
   const { state, setHomePopularity } = useRequestAPI();

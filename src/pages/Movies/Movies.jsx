@@ -1,48 +1,53 @@
 import { useSearchParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import InputSearch from '../../components/InpunSearch';
+import { useEffect, useState } from 'react';
+import InputSearch from '../../components/InputSearch';
 import { useRequestAPI } from '../../hooks/RequestAPI/HooksRequestAPI';
 
-import ItemLink from '../../components/ListFilm';
+import ItemLink from '../../components/ItemLink';
 
 export function Movies() {
   const { state, setQuerySearch } = useRequestAPI(); // eslint-disable-line
-
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams(); // eslint-disable-line
   const querySearch = searchParams.get('query') ?? '';
 
   const chengeValue = value => {
-    setSearchParams(value !== '' ? { query: value } : {});
+    setQuery(value);
   };
 
   useEffect(() => {
     if (querySearch === '') {
       return;
     }
-
+    console.log(query);
+    setQuery(querySearch);
     setQuerySearch(querySearch);
   }, []); // eslint-disable-line
 
   const submitQuery = e => {
     e.preventDefault();
-    setQuerySearch(querySearch);
+    setSearchParams(query !== '' ? { query: query } : {});
+
+    setQuerySearch(query);
   };
 
   return (
     <>
       <InputSearch
         onChenge={chengeValue}
-        value={querySearch}
+        value={query}
         submit={submitQuery}
       ></InputSearch>
 
-      <ul>
-        {state
-          ? state.results.map(({ original_title, id }) => (
-              <ItemLink key={id} title={original_title} id={id} />
-            ))
-          : 'Enter movie name'}
-      </ul>
+      {state ? (
+        <ul>
+          {state.results.map(({ original_title, id }) => (
+            <ItemLink key={id} title={original_title} id={id} />
+          ))}
+        </ul>
+      ) : (
+        <p>'Enter movie name'</p>
+      )}
     </>
   );
 }
